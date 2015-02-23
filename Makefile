@@ -23,7 +23,14 @@ cython: DASSL DASPK DASKR
 	python setup.py build_ext $(CYTHON_FLAGS)
 
 install: DASSL DASPK DASKR cython
+ifeq (,$(wildcard pydas/daspk.so))
+	# the file "pydas/dapsk.so" does not exist, so don't install daspk
 	python setup.py install
+	@echo "NOTE: Installed without DASPK, because it had not been compiled."
+else
+	# the file "pydas/dapsk.so" does exist, so install daspk
+	python setup.py daspk install
+endif
 
 DASSL:
 	$(MAKE) -C dassl F77=$(F77)
