@@ -135,15 +135,15 @@ Homebrew (http://brew.sh) is an easy way to get gfortran::
 
 But your system may still not be able to find the correct `libgfortran.a` library file
 (see https://github.com/mxcl/homebrew/issues/8539 ). Also, there are some problems
-linking with `clang`, so you need to make it link with `gcc`. This one-liner should
+linking with `clang`, so you need to make it link with `gcc`. This should
 build and install, assuming you have NumPy, Cython, etc. all set up::
 
-    $ LIBRARY_PATH=/usr/local/lib/gcc LDSHARED='gcc -bundle -undefined dynamic_lookup -arch x86_64' make F77=gfortran install
+    $ export LIBRARY_PATH=$(dirname $(gfortran -print-libgcc-file-name))
+    $ make
+    $ make daspk
+    $ make install
 
-Or perhaps, with a newer version of Homebrew / Python / gfortran / NumPy / Cython, it will be a simple::
-
-    $ LIBRARY_PATH=/usr/local/Cellar/gfortran/4.8.0/gfortran/lib make F77=gfortran
-
+Although at one stage it also required ``LDSHARED='gcc -bundle -undefined dynamic_lookup -arch x86_64'``.
 It seems to keep on changing. If you have difficulty, check the
 `issue tracker <https://github.com/jwallen/PyDAS/issues/>`_, and if you solve
 your difficulty, please share your successful approach.
