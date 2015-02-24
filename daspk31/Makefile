@@ -12,6 +12,8 @@ DOBJ=solver/adf_dummy.o solver/daux.o solver/ddaskr.o solver/ddaspk.o solver/dli
 
 DLIB=libddaspk31.a
 
+.PRECIOUS: solver/%.f
+
 all: $(DLIB)
 
 $(DLIB): $(DOBJ)
@@ -19,6 +21,12 @@ $(DLIB): $(DOBJ)
 
 %.o: %.f
 	$(F77) $(CFLAGS) -c $< -o $@
+
+solver/%.f: | daspk31.tgz
+	tar zxvf daspk31.tgz -C ../
+
+daspk31.tgz:
+	./download_daspk31.sh
 
 clean:
 	rm -f $(DLIB) $(DOBJ)
