@@ -24,11 +24,11 @@ cython: DASSL DASPK DASKR
 
 install: DASSL DASPK DASKR cython
 ifeq (,$(wildcard pydas/daspk.so))
-	# the file "pydas/dapsk.so" does not exist, so don't install daspk
+	# the file "pydas/daspk.so" does not exist, so don't install daspk
 	python setup.py install
 	@echo "NOTE: Installed without DASPK, because it had not been compiled."
 else
-	# the file "pydas/dapsk.so" does exist, so install daspk
+	# the file "pydas/daspk.so" does exist, so install daspk
 	python setup.py daspk install
 endif
 
