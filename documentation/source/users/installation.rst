@@ -21,7 +21,7 @@ to work, and are probably your best bet no matter what operating system you
 are using. On Windows the `MinGW <http://www.mingw.org/>`_ compiler collection 
 provides these compilers.
 
-The DASSL, DASPK, and DASKR solvers are provided with the PyDAS package; you
+The DASSL and DASKR solvers are provided with the PyDAS package; you
 do not need to download them separately.
 
 The DASPK3.1 solver is subject to copyright restrictions and therefore
@@ -43,7 +43,7 @@ Unix-like Systems
 -----------------
 
 A Makefile has been provided that can be used to compile all of the solvers
--- DASSL, DASPK, and DASKR -- and the PyDAS wrapper code. To use, invoke the
+-- DASSL, DASPK3.1, and DASKR -- and the PyDAS wrapper code. To use, invoke the
 following command from the root package directory::
 
     $ make
@@ -51,19 +51,15 @@ following command from the root package directory::
 This command will build PyDAS in-place, rather than installing it to your
 Python package directory. At this point you can optionally run the unit test 
 script ``test.py`` and/or any of the provided examples to confirm that PyDAS
-was compiled successfully.
-
-If you wish to compile the DASPK3.1 solver and wrapper, use the command. 
-Make sure you have already downloaded the fortran source files.  See the
-``daspk/README`` file for where to download the files.::
-
-    $ make daspk
+was compiled successfully. The user will also be prompted to download and compile
+DASPK3.1. The DASPK3.1 solver and wrapper will be compiled automatically if the user 
+agrees to the copyright restrictions.
 
 If you wish to formally install PyDAS, run the following command from the root 
 package directory after the ``make`` command (you may need root privileges for 
 this)::
 
-    $ python setup.py install
+    $ make install
 
 You may wish to write a file `make.inc` that sets certain variables used by
 the Makefiles (e.g. the Fortran compiler). An example of such a file, 
@@ -110,4 +106,8 @@ package directory after the batch script completes successfully (you may need
 administrator privileges for this)::
 
     > python setup.py install
+    
+Use the following command if you want to install both the DASSL and DASPK wrappers ::
+
+    > python setup.py daspk install 
 
