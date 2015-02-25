@@ -19,7 +19,7 @@ dassl: DASSL cython
 daspk: DASPK31 cython
 
 cython:
-ifeq (,$(wildcard daspk31/solver/ddaspk.o))
+ifeq (,$$(wildcard daspk31/solver/ddaspk.o))
 	# DASPK3.1 was not compiled. Cythonize the wrapper for only DASSL.
 	python setup.py build_ext $(CYTHON_FLAGS)
 else
@@ -29,7 +29,7 @@ endif
 
 
 install: DASSL DASPK31 DASKR cython
-ifeq (,$(wildcard pydas/daspk.so))
+ifeq (,$$(wildcard pydas/daspk.so))
 	# the file "pydas/daspk.so" does not exist, so don't install daspk
 	python setup.py install
 	@echo "NOTE: Installed without DASPK, because it had not been compiled."
