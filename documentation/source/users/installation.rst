@@ -26,7 +26,7 @@ do not need to download them separately.
 
 The DASPK3.1 solver is subject to copyright restrictions and therefore
 must be downloaded separately either using the ``daspk31/download_daspk31.sh`` 
-script or by manually unpacking the files from the daspk31 source code
+script or by manually downloading the daspk31.tgz source code
 found on `Linda Petzold's software page <http://www.cs.ucsb.edu/~cse/software.html>`_ into the ``daspk31`` folder.
 
 .. [#f1] The Fortran interfaces are exposed to Python via C, so the installer
@@ -68,6 +68,22 @@ the Makefiles (e.g. the Fortran compiler). An example of such a file,
 Windows
 -------
 
+The easiest way to compile PyDAS on Windows is using the MinGW compiler in either
+cygwin or git bash.  Simply use the commands::
+
+    $ mingw32-make
+
+If errors arise in downloading the DASPK3.1 fortran code, you may need to download it 
+manually into the ``daspk31`` folder from  <http://www.cs.ucsb.edu/~cse/software.html>`_ .
+Make sure to keep the daspk31.tgz file in the ``daspk31`` folder.
+
+If you wish to formally install PyDAS, run the following command from the root 
+package directory after the batch script completes successfully (you may need
+administrator privileges for this)::
+
+    $ mingw32-make install
+
+
 .. warning:: 
 
     A regression in Cython 0.14 has resulted in it being unusable for PyDAS
@@ -76,7 +92,7 @@ Windows
     `this thread <http://www.mail-archive.com/cython-dev@codespeak.net/msg10367.html>`_
     from the ``cython-dev`` mailing list for more information.
 
-A batch script ``make.bat`` has been provided in the root package directory.
+Alternatively, a batch script ``make.bat`` has been provided in the root package directory.
 Double-clicking this script will compile the DASSL solver into a static library and also compile the PyDAS wrapper code. 
 
 The batch script ``make_daspk.bat`` has been provided to compile the DASPK3.1
@@ -101,13 +117,4 @@ any of the provided examples to confirm that PyDAS was compiled successfully.
     `this page <http://wiki.cython.org/FAQ#HowdoIworkaroundthe.22unabletofindvcvarsall.bat.22errorwhenusingMinGWasthecompiler.28onWindows.29.3F>`_.
     In particular the ``pydistutils.cfg`` file approach should work.
 
-If you wish to formally install PyDAS, run the following command from the root 
-package directory after the batch script completes successfully (you may need
-administrator privileges for this)::
-
-    > python setup.py install
-    
-Use the following command if you want to install both the DASSL and DASPK wrappers ::
-
-    > python setup.py daspk install 
 
