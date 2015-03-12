@@ -8,9 +8,11 @@ F77=gfortran
 
 CFLAGS=-fPIC -O3
 
-DOBJ=adf_dummy.o daux.o ddaskr.o ddaspk.o dlinpk.o dsensd.o mpi_dummy.o
+DOBJ=solver/adf_dummy.o solver/daux.o solver/ddaskr.o solver/ddaspk.o solver/dlinpk.o solver/dsensd.o solver/mpi_dummy.o
 
 DLIB=libddaspk31.a
+
+.PRECIOUS: solver/%.f
 
 all: $(DLIB)
 
@@ -19,6 +21,12 @@ $(DLIB): $(DOBJ)
 
 %.o: %.f
 	$(F77) $(CFLAGS) -c $< -o $@
+
+solver/%.f: | daspk31.tgz
+	tar zxvf daspk31.tgz -C ../
+
+daspk31.tgz:
+	./download_daspk31.sh
 
 clean:
 	rm -f $(DLIB) $(DOBJ)
