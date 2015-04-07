@@ -136,7 +136,7 @@ But your system may still not be able to find the correct `libgfortran.a` librar
 linking with `clang`, so you need to make it link with `gcc`. This should
 build and install, assuming you have NumPy, Cython, etc. all set up::
 
-    $ export LIBRARY_PATH=$(dirname $(gfortran -print-libgcc-file-name))
+    $ export LIBRARY_PATH=$(dirname $(gfortran -print-file-name=libgfortran.a))
     $ make
     $ make install
 
