@@ -8,6 +8,7 @@ This file contains unit tests for PyDASPK.
 import unittest
 
 from pydas.daspk import DASPK
+import os
 import math
 import numpy
 import matplotlib.pyplot as plt
@@ -128,7 +129,12 @@ class DASPKCheck(unittest.TestCase):
         Note that C(t) = A(0) - A(t) - B(t) since the governing equations are
         conservative.
         """
-        
+        graph_filename = 'DASPKCheck.testSimple.pdf'
+        try:
+            os.remove(graph_filename)
+        except OSError:
+            pass
+            
         k1 = 1.0; k2 = 0.25
         model = DASPKSimpleModel(k1, k2)
         t0 = 0.0; y0 = numpy.array([1.0, 0.0, 0.0], numpy.float64)
@@ -159,9 +165,13 @@ class DASPKCheck(unittest.TestCase):
                 self.assertAlmostEqual(B / Btrue, 1.0, 6, 'At t = %g: B = %g, but Btrue = %g' % (t, B, Btrue))
             if Ctrue > 1e-8:
                 self.assertAlmostEqual(C / Ctrue, 1.0, 6, 'At t = %g: C = %g, but Ctrue = %g' % (t, C, Ctrue))
-        
-        plt.plot(tvec,Avec,tvec,Bvec,tvec,Cvec)
-        plt.show()
+        plt.figure(3)
+        plt.plot(tvec, Avec, label='A')
+        plt.plot(tvec, Bvec, label='B')
+        plt.plot(tvec, Cvec, label='C')
+        plt.legend()
+        plt.savefig(graph_filename)
+        #plt.show()
 
     def testSensitivity(self):
         """
@@ -190,7 +200,16 @@ class DASPKCheck(unittest.TestCase):
 
         This tests whether finite difference sensitivities work in daspik
         """
-
+        graph1_filename = 'DASPKCheck.testSensitivity.1.pdf'
+        graph2_filename = 'DASPKCheck.testSensitivity.2.pdf'
+        try:
+            os.remove(graph1_filename)
+        except OSError:
+            pass
+        try:
+            os.remove(graph2_filename)
+        except OSError:
+            pass
         k1 = 1.0; k2 = 0.25
         model = DASPKSensitivityModel(True, 1)
         t0 = 0.0
@@ -258,6 +277,9 @@ class DASPKCheck(unittest.TestCase):
         plt.plot(tvec, Avec, label='A')
         plt.plot(tvec, Bvec, label='B')
         plt.plot(tvec, Cvec, label='C')
+        plt.legend()
+        plt.savefig(graph1_filename)
+        
         plt.figure(2)
         plt.plot(tvec,dAdk1vec,label='dA/dk1')
         plt.plot(tvec,dAdk2vec,label='dA/dk2')
@@ -267,7 +289,8 @@ class DASPKCheck(unittest.TestCase):
         plt.plot(tvec,dCdk2vec,label='dC/dk2')
         
         plt.legend()
-        plt.show()
+        plt.savefig(graph2_filename)
+        #plt.show()
 
 ################################################################################
 
