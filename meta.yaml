@@ -1,0 +1,39 @@
+# For conda build
+package:
+  name: pydas
+  version: "0.1.0"
+
+source:
+  path: .
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - gcc # [unix]
+    - python
+    - setuptools
+    - cython ==0.21
+    - numpy
+    - wget
+  run:
+    - libgcc # [unix]
+    - python
+    - numpy
+
+test:
+  requires:
+    - nose
+    - matplotlib
+  imports:
+    - pydas
+    - pydas.dassl
+    - pydas.daspk
+  commands:
+    - nosetests -P --all-modules -v -w $SRC_DIR/tests
+
+about:
+  home: http://github.com/GreenGroup/PyDAS
+  license: MIT
+  summary: "A Python wrapper to several differential algebraic system solvers, namely DASSL and DASPK."
