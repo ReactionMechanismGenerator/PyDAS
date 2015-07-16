@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     # Run the setup command
     setup(name='PyDAS',
-        version='0.1.0',
+        version='1.0.0',
         description='A Python wrapper to several differential algebraic system solvers',
         author='Joshua W. Allen',
         author_email='joshua.w.allen@gmail.com',
