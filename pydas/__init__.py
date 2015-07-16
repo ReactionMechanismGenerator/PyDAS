@@ -30,6 +30,8 @@
 
 import os
 
+__version__ = '1.0.0'
+
 def get_include():
     """
     Return the PyDAS include directory.
