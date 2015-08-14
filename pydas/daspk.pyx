@@ -83,7 +83,7 @@ cdef extern from "daspk.h":
 
 class DASPKError(Exception):
     """
-    An exception class for exceptions relating to use of DASSL.
+    An exception class for exceptions relating to use of DASPK.
     """
     
     def __init__(self, msg):
@@ -114,7 +114,7 @@ cdef class DASPK:
     `atol`              ``object``          The absolute tolerance, either a scalar or a vector
     `rtol`              ``object``          The relative tolerance, either a scalar or a vector
     `maxOrder`          ``int``             The maximum order of the backward differentiation formulas, from ``1`` to ``5`` (default is ``5``)
-    `initialStep`       ``double``          An initial step size to use, or ``0`` to let DASSL choose
+    `initialStep`       ``double``          An initial step size to use, or ``0`` to let DASPK choose
     `maximumStep`       ``double``          An maximum allowed step size to use, or ``0``
     `tstop`             ``object``          A value of the independent variable to avoid integrating past, e.g. if system is undefined there
     `bandwidths`        ``object``          If the Jacobian matrix is banded, contains the lower and upper half-bandwidths
@@ -123,7 +123,7 @@ cdef class DASPK:
     `sensmethod`        ``int``             ``0`` to use default simultaneous corrector, ``1`` for staggered corrector, ``2`` for staggered direct method
     =================== =================== ====================================
     
-    These options are passed to DASSL when the :meth:`initialize()` method is
+    These options are passed to DASPK when the :meth:`initialize()` method is
     called.
     """
     
@@ -159,14 +159,14 @@ cdef class DASPK:
         if dydt0 is not None and len(dydt0) != neq:
             raise DASPKError('Expected %i values of dydt0, got %i.' % (neq, len(dydt0)))
         
-        # Initialize all DASSL options to default values (i.e. all zeros)
-        # Note that only the first 11 elements are used in DASSL
+        # Initialize all DASPK options to default values (i.e. all zeros)
+        # Note that only the first 11 elements are used in DASPK
         self.info = np.zeros(30, np.int32)
         
-        # Tell DASSL we are initializing the problem
+        # Tell DASPK we are initializing the problem
         self.info[0] = 0
         
-        # Tell DASSL about format of absolute and relative tolerances
+        # Tell DASPK about format of absolute and relative tolerances
         try:
             atol = float(atol)
             rtol = float(rtol)
@@ -443,9 +443,9 @@ cdef class DASPK:
         """
         
         cdef int idid
-        # Tell DASSL to only take one simulation step towards tout
+        # Tell DASPK to only take one simulation step towards tout
         self.info[2] = 1
-        # Call DASSL
+        # Call DASPK
         idid = self.solve(tout)
         return idid
         
@@ -454,7 +454,7 @@ cdef class DASPK:
         Invoke DASPK with the given state of the object.
         """
         
-        # Set the global DASSL object to this object (so we can get back to
+        # Set the global DASPK object to this object (so we can get back to
         # this object's residual and jacobian methods
         global daspkObject
         daspkObject = self
@@ -524,12 +524,12 @@ cdef class DASPK:
     #   derivatives `dydt`. Return a numpy array with the values of the 
     #   Jacobian matrix.
     #   """
-    #   print('DASSLError: You must implement the jacobian() method in your derived class.')
+    #   print('DASPKError: You must implement the jacobian() method in your derived class.')
     #   return np.zeros((y.shape[0],y.shape[0]), np.float64)
         
 ################################################################################
 
-# A module-level variable that contains the currently active DASSL object
+# A module-level variable that contains the currently active DASPK object
 # The residual and jacobian functions use this to call the object's residual
 # and jacobian functions
 cdef DASPK daspkObject
