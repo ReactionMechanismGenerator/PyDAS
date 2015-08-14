@@ -443,10 +443,54 @@ cdef class DASPK:
         """
         
         cdef int idid
+        cdef str msg
         # Tell DASPK to only take one simulation step towards tout
         self.info[2] = 1
         # Call DASPK
         idid = self.solve(tout)
+        # An negative IDID value indicates something went wrong.  
+        # If IDID = -1, a large amount of work has been expended, requiring 500 steps, other
+        # negative values of IDID indicate a larger problem.
+        if idid < -1:
+            if idid == -2:
+                msg = "The error tolerances are too stringent."
+            elif idid == -3:
+                msg = "The local error test cannot be satisfied because you specified a zero component in ATOL and the corresponding computed solution component \
+is zero.  Thus, a pure relative error test is impossible for this component."
+            elif idid == -5:
+                msg = "Your JAC routine failed with the Krylov method.  Check for errors in JAC and restart the integration."
+            elif idid == -6:
+                msg = "Repeated error test failures occurred on the last attempted step in DDASPK.  A singularity in the solution may be present.  If you are absolutely \
+certain you want to continue, you should restart the integration.  (Provide initial values of Y and YPRIME which are consistent.)"
+            elif idid == -7:
+                msg = "Repeated convergence test failures occurred on the last attempted step in DDASPK.  An inaccurate or ill-conditioned Jacobian or preconditioner may be the \
+problem.  If you are absolutely certain you want to continue, you should restart the integration."
+            elif idid == -8:
+                msg = "The matrix of partial derivatives is singular, with the use of direct methods.  Some of your equations may be redundant.  DDASPK cannot solve the problem \
+as stated.  It is possible that the redundant equations could be removed, and then DDASPK could solve the problem.  It is also possible that a solution to your problem either does not exist \
+or is not unique."
+            elif idid == -9:
+                msg = "DDASPK had multiple convergence test failures, preceded by multiple error test failures, on the last attempted step.  It is possible that your problem  \
+is ill-posed and cannot be solved using this code. Or, there may be a discontinuity or a singularity in the solution.  If you are absolutely certain you \
+want to continue, you should restart the integration."
+            elif idid == -10:
+                msg = "DDASPK had multiple convergence test failures because IRES was equal to -1.  If you are absolutely certain you want to continue, you should restart the integration."
+            elif idid == -11:
+                msg = "There was an unrecoverable error (IRES = -2) from RES inside the nonlinear system solver.  Determine the cause before trying again."
+            elif idid == -12:
+                msg = "DDASPK failed to compute the initial Y and YPRIME vectors.  This could happen because the initial  approximation to Y or YPRIME was not very good, or because \
+no consistent values of these vectors exist. The problem could also be caused by an inaccurate or singular iteration matrix, or a poor preconditioner."
+            elif idid == -13:
+                msg = "There was an unrecoverable error encountered inside  your PSOL routine.  Determine the cause before  trying again."
+            elif idid == -14:
+                msg = "the Krylov linear system solver failed to achieve convergence.  This may be due to ill-conditioning in the iteration matrix, or a singularity in the preconditioner (if one is being used). \
+Another possibility is that there is a better choice of Krylov parameters (see INFO(13)). Possibly the failure is caused by redundant equations in the system, or by inconsistent equations. \
+In that case, reformulate the system to make it consistent and non-redundant."
+            elif idid == -33:
+                msg = "You cannot continue the solution of this problem. An attempt to do so will result in your run being terminated."
+            else:
+                msg = "An unknown error occurred."
+            raise DASPKError("DASPK returned with an IDID = {0}, {1}".format(idid, msg))
         return idid
         
     cdef solve(self, double tout):
