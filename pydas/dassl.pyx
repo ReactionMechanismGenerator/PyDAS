@@ -52,6 +52,7 @@ cimport numpy as np
 
 cimport cython
 
+from pydas.observer cimport Subject
 ################################################################################
 
 # Expose the (double-precision) DASSL function
@@ -91,7 +92,7 @@ class DASSLError(Exception):
 
 ################################################################################
 
-cdef class DASSL:
+cdef class DASSL(Subject):
     """
     A base class for using the DASSL differential algebraic system solver by
     L. R. Petzold. DASSL can be used to solve systems of the form
@@ -126,6 +127,7 @@ cdef class DASSL:
 
     
     def __init__(self, maxOrder=5, initialStep=0, maximumStep=0, tstop=None, bandwidths=None, nonnegative=False, **kwargs):
+        Subject.__init__(self)
         self.maxOrder = maxOrder
         self.initialStep = initialStep
         self.maximumStep = maximumStep
