@@ -10,4 +10,4 @@ PyDAS Documentation
     installation
     tutorial
     cython
-
+    observer
