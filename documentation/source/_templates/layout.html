@@ -1,6 +1,6 @@
 {% extends "!layout.html" %}
 
-{#%- set sourcename = False %} {#Remove the "view this page's source" link #}
+{%- set sourcename = False %} {#Remove the "view this page's source" link #}
 
 {% block rootrellink %}
         <li><a href="{{ pathto('index') }}">Home</a> |&nbsp;</li>
@@ -9,24 +9,29 @@
 
 {%- block header %}
     <div class="header">
-         <img src="{{ pathto('_static/pydas_logo.png', 1) }}" alt="PyDAS" />
+        <h1 style="margin-left: 30px"><a href="{{ pathto('index') }}">PyDAS</a></h2>
     </div>
 {%- endblock %}
 
-{%- block footer %}
-    <div class="footer">
 
-    {%- if hasdoc('copyright') %}
-      {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
-    {%- else %}
-      {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
-    {%- endif %}
-    {%- if last_updated %}
-      {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
-    {%- endif %}
-    {%- if show_sphinx %}
-      {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
-    {%- endif %}
-    </div>
-{%- endblock %}
+{%- block relbar1 %}{% endblock %}
 
+  {%- block document %}
+      <div class="documentwrapper">
+      {%- if render_sidebar %}
+        <div class="bodywrapper">
+      {%- endif %}
+          <div class="body">
+            {{ relbar() }}
+            {% block body %} {% endblock %}
+          </div>
+      {%- if render_sidebar %}
+        </div>
+      {%- endif %}
+      </div>
+  {%- endblock %}
+
+{%- block relbar2 %}{% endblock %}
+
+  </body>
+</html>

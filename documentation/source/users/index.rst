@@ -1,5 +1,5 @@
 ******************
-PyDAS Users' Guide
+PyDAS Documentation
 ******************
 
 .. toctree::
