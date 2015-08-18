@@ -443,11 +443,68 @@ cdef class DASPK:
         """
         
         cdef int idid
-        cdef str msg
         # Tell DASPK to only take one simulation step towards tout
         self.info[2] = 1
         # Call DASPK
         idid = self.solve(tout)
+
+        return idid
+        
+    cdef solve(self, double tout):
+        """
+        Invoke DASPK with the given state of the object.
+        """
+        
+        # Set the global DASPK object to this object (so we can get back to
+        # this object's residual and jacobian methods
+        global daspkObject
+        daspkObject = self
+        
+        cdef int neq = self.y.shape[0]
+        cdef int lrw = self.rwork.shape[0]
+        cdef int liw = self.iwork.shape[0]
+        cdef bint first = True
+        
+        cdef int idid
+        cdef str msg
+        
+        cdef void* res = <void*> residual
+        cdef void* jac = <void*> 0        
+        cdef void* psol = <void*> 0
+        cdef void* g_res = <void*> 0
+        if self.info[4] == 1:
+            jac = <void*> jacobian
+        
+        # Call DASPK
+        while first or self.idid == -1:
+            ddaspk_(
+                res,
+                &(neq),
+                &(self.t),
+                <np.float64_t*> self.y.data,
+                <np.float64_t*> self.dydt.data,
+                &(tout),
+                <int*> self.info.data,
+                <np.float64_t*> self.rtol.data,
+                <np.float64_t*> self.atol.data,
+                &(self.idid),
+                <np.float64_t*> self.rwork.data,
+                &(lrw),
+                <int*> self.iwork.data,
+                &(liw),
+                <np.float64_t*> self.rpar.data,
+                <int*> self.ipar.data,
+                jac,
+                psol,
+                <np.float64_t*> self.senpar.data,
+                g_res,
+            )
+            first = False
+            if self.idid == -1:
+                print('Attempting another 500 steps...')
+                self.info[0] = 1
+        
+        idid = self.idid
         # An negative IDID value indicates something went wrong.  
         # If IDID = -1, a large amount of work has been expended, requiring 500 steps, other
         # negative values of IDID indicate a larger problem.
@@ -491,59 +548,6 @@ In that case, reformulate the system to make it consistent and non-redundant."
             else:
                 msg = "An unknown error occurred."
             raise DASPKError("DASPK returned with an IDID = {0}, {1}".format(idid, msg))
-        return idid
-        
-    cdef solve(self, double tout):
-        """
-        Invoke DASPK with the given state of the object.
-        """
-        
-        # Set the global DASPK object to this object (so we can get back to
-        # this object's residual and jacobian methods
-        global daspkObject
-        daspkObject = self
-        
-        cdef int neq = self.y.shape[0]
-        cdef int lrw = self.rwork.shape[0]
-        cdef int liw = self.iwork.shape[0]
-        cdef bint first = True
-        
-        cdef void* res = <void*> residual
-        cdef void* jac = <void*> 0        
-        cdef void* psol = <void*> 0
-        cdef void* g_res = <void*> 0
-        if self.info[4] == 1:
-            jac = <void*> jacobian
-        
-        # Call DASPK
-        while first or self.idid == -1:
-            ddaspk_(
-                res,
-                &(neq),
-                &(self.t),
-                <np.float64_t*> self.y.data,
-                <np.float64_t*> self.dydt.data,
-                &(tout),
-                <int*> self.info.data,
-                <np.float64_t*> self.rtol.data,
-                <np.float64_t*> self.atol.data,
-                &(self.idid),
-                <np.float64_t*> self.rwork.data,
-                &(lrw),
-                <int*> self.iwork.data,
-                &(liw),
-                <np.float64_t*> self.rpar.data,
-                <int*> self.ipar.data,
-                jac,
-                psol,
-                <np.float64_t*> self.senpar.data,
-                g_res,
-            )
-            first = False
-            if self.idid == -1:
-                print('Attempting another 500 steps...')
-                self.info[0] = 1
-        
         # DASPK wrote onto the self.idid parameter automatically
         # Let's return it to the user
         return self.idid

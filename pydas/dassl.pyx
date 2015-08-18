@@ -299,13 +299,63 @@ cdef class DASSL:
         """
         
         cdef int idid
-        cdef str msg
         
         # Tell DASSL to only take one simulation step towards tout
         self.info[2] = 1
         # Call DASSL
         idid = self.solve(tout)
+        return idid
         
+    cdef solve(self, double tout):
+        """
+        Invoke DASSL with the given state of the object.
+        """
+        
+        # Set the global DASSL object to this object (so we can get back to
+        # this object's residual and jacobian methods
+        global dasslObject
+        dasslObject = self
+        
+        cdef int neq = self.y.shape[0]
+        cdef int lrw = self.rwork.shape[0]
+        cdef int liw = self.iwork.shape[0]
+        cdef bint first = True
+        
+        cdef int idid
+        cdef str msg
+        
+        cdef void* res = <void*> residual
+        cdef void* jac = <void*> 0
+        if self.info[4] == 1:
+            jac = <void*> jacobian
+        
+        # Call DASSL
+        while first or self.idid == -1:
+            ddassl_(
+                res,
+                &(neq),
+                &(self.t),
+                <np.float64_t*> self.y.data,
+                <np.float64_t*> self.dydt.data,
+                &(tout),
+                <int*> self.info.data,
+                <np.float64_t*> self.rtol.data,
+                <np.float64_t*> self.atol.data,
+                &(self.idid),
+                <np.float64_t*> self.rwork.data,
+                &(lrw),
+                <int*> self.iwork.data,
+                &(liw),
+                <np.float64_t*> self.rpar.data,
+                <int*> self.ipar.data,
+                jac
+            )
+            first = False
+            if self.idid == -1:
+                print('Attempting another 500 steps...')
+                self.info[0] = 1
+                
+        idid = self.idid
         # An negative IDID value indicates something went wrong.  
         # If IDID = -1, a large amount of work has been expended, requiring 500 steps, other
         # negative values of IDID indicate a larger problem.
@@ -341,54 +391,7 @@ no consistent values of these vectors exist. The problem could also be caused by
             else:
                 msg = "An unknown error occurred."
             raise DASSLError("DASSL returned with an IDID = {0}, {1}".format(idid, msg))
-        return idid
-        
-    cdef solve(self, double tout):
-        """
-        Invoke DASSL with the given state of the object.
-        """
-        
-        # Set the global DASSL object to this object (so we can get back to
-        # this object's residual and jacobian methods
-        global dasslObject
-        dasslObject = self
-        
-        cdef int neq = self.y.shape[0]
-        cdef int lrw = self.rwork.shape[0]
-        cdef int liw = self.iwork.shape[0]
-        cdef bint first = True
-        
-        cdef void* res = <void*> residual
-        cdef void* jac = <void*> 0
-        if self.info[4] == 1:
-            jac = <void*> jacobian
-        
-        # Call DASSL
-        while first or self.idid == -1:
-            ddassl_(
-                res,
-                &(neq),
-                &(self.t),
-                <np.float64_t*> self.y.data,
-                <np.float64_t*> self.dydt.data,
-                &(tout),
-                <int*> self.info.data,
-                <np.float64_t*> self.rtol.data,
-                <np.float64_t*> self.atol.data,
-                &(self.idid),
-                <np.float64_t*> self.rwork.data,
-                &(lrw),
-                <int*> self.iwork.data,
-                &(liw),
-                <np.float64_t*> self.rpar.data,
-                <int*> self.ipar.data,
-                jac
-            )
-            first = False
-            if self.idid == -1:
-                print('Attempting another 500 steps...')
-                self.info[0] = 1
-        
+
         # DASSL wrote onto the self.idid parameter automatically
         # Let's return it to the user
         return self.idid
