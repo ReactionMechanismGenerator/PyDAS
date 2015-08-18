@@ -52,6 +52,8 @@ cimport numpy as np
 
 cimport cython
 
+from pydas.observer cimport Subject
+
 ################################################################################
 
 # Expose the (double-precision) DASPK function
@@ -81,6 +83,8 @@ cdef extern from "daspk.h":
 
 ################################################################################
 
+
+
 class DASPKError(Exception):
     """
     An exception class for exceptions relating to use of DASPK.
@@ -93,7 +97,7 @@ class DASPKError(Exception):
         return self.msg
 
 ################################################################################
-cdef class DASPK:
+cdef class DASPK(Subject):
     """
     A base class for using the DASPK differential algebraic system solver by
     L. R. Petzold. DASPK can be used to solve systems of the form
@@ -128,6 +132,7 @@ cdef class DASPK:
     """
     
     def __init__(self, maxOrder=5, initialStep=0, maximumStep=0, tstop=None, bandwidths=None, nonnegative=False, sensitivity=False, sensmethod=0):
+        Subject.__init__(self)
         self.maxOrder = maxOrder
         self.initialStep = initialStep
         self.maximumStep = maximumStep

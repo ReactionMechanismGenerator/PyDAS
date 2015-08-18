@@ -3,7 +3,9 @@ cimport numpy as np
 
 cimport cython
 
-cdef class DASPK:
+from pydas.observer cimport Subject
+ 
+cdef class DASPK(Subject):
 
     cdef public int maxOrder
     cdef public object tstop

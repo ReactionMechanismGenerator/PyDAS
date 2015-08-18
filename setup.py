@@ -49,6 +49,12 @@ if __name__ == '__main__':
     Cython.Compiler.Options.annotate = True
     
     # The Cython extension modules to compile
+    observer_ext = Extension(
+            'pydas.observer', 
+            ['pydas/observer.pyx'], 
+            include_dirs=['pydas'], 
+        )
+
     pydas_ext = Extension(
             'pydas.dassl', 
             ['pydas/dassl.pyx'], 
@@ -63,10 +69,10 @@ if __name__ == '__main__':
             libraries=['gfortran'], 
             extra_objects=['daspk31/solver/adf_dummy.o','daspk31/solver/daux.o','daspk31/solver/ddaspk.o','daspk31/solver/dlinpk.o','daspk31/solver/dsensd.o','daspk31/solver/mpi_dummy.o'],
         )
-    
 
-    modules = ['pydas.dassl']
-    extensions = [pydas_ext]
+
+    modules = ['pydas.dassl', 'pydas.observer']
+    extensions = [pydas_ext, observer_ext]
 
     if 'daspk' in sys.argv:
         # Optionally compile and make pydaspk if the user requests it
