@@ -4,7 +4,7 @@ PyDAS - A Python wrapper to several differential algebraic system solvers
 
 For the full documentation, please view the PDF found in the
 ``documentation`` folder. Or download it directly 
-`here <https://github.com/ReactionMechanismGenerator/PyDAS/blob/master/documentation/PyDAS_Documentation.pdf`_.
+`here <https://github.com/ReactionMechanismGenerator/PyDAS/raw/master/documentation/PyDAS_Documentation.pdf>`_.
 
 Introduction
 ============
