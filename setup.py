@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
     # Run the setup command
     setup(name='PyDAS',
-        version='1.0.0',
+        version='1.0.1',
         description='A Python wrapper to several differential algebraic system solvers',
         author='Joshua W. Allen, Connie W. Gao, and the Reaction Mechanism Generator Team',
         author_email='rmg_dev@mit.edu',
