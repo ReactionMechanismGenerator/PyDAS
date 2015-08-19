@@ -5,8 +5,9 @@
 #
 #   PyDAS - A Python wrapper to several differential algebraic system solvers
 #
-#   Copyright (c) 2010-2014 by Joshua W. Allen (joshua.w.allen@gmail.com) 
-#                           extended by Connie W. Gao (connieg@mit.edu)
+#   Copyright (c) 2010-2015 by Joshua W. Allen (joshua.w.allen@gmail.com), 
+#                           Connie W. Gao (connie.w.gao@gmail.com) and the
+#                           Reaction Mechanism Generator Team (rmg_dev@mit.edu)
 #
 #   Permission is hereby granted, free of charge, to any person obtaining a
 #   copy of this software and associated documentation files (the 'Software'),
