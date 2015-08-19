@@ -2,8 +2,37 @@
 Installation
 ************
 
+Installing PyDAS binary package via Anaconda
+============================================
+
+**Currently only available for Unix-based systems: Linux and MacOSX**
+
+If you wish to use PyDAS out of the box, you can now install it as a binary package using the Anaconda platform.  
+PyDAS can now be installed in binary format using the Anaconda Python Platform.
+This is recommended for a basic user who will not be altering the source code of PyDAS or who is
+less familiar with Unix-based systems.
+
+* Download and install the `Anaconda Python Platform <http://continuum.io/downloads>`_. When prompted to append Anaconda to your PATH, select or type Yes.
+
+* Install PyDAS binary.  Dependencies will be installed automatically.  Type the following into your Terminal to do so ::
+
+    conda install -c rmg -y pydas
+
+* You may now run a PyDAS test job. Save the `Batch Reactor Reaction Series Script <https://github.com/ReactionMechanismGenerator/PyDAS/blob/master/examples/rxnSeries/rxnSeries.py>`_  
+  to a local directory.  Use the Terminal to run the script inside that folder using the following command ::
+
+    python rxnSeries.py
+
+You can now import any functions inside the PyDAS package directly from Python or your own scripts.
+
+
+Installing PyDAS via Source
+===========================
+
+Installing PyDAS by compiling the source is recommended for developers and users who expect to modify the PyDAS code.
+
 Prerequisites
-=============
+-------------
 
 PyDAS is currently available for the `Python <http://www.python.org/>`_ 2.x 
 series. In particular, Python 2.5 and later are known to work. In addition to
@@ -32,15 +61,15 @@ found on `Linda Petzold's software page <http://www.cs.ucsb.edu/~cse/software.ht
 .. [#f1] The Fortran interfaces are exposed to Python via C, so the installer
     needs to be able to link object files from Fortran and C for this to work.
 
-Installing PyDAS
-================
+Compiling PyDAS
+---------------
 
 If you are running an operating system other than Windows, refer to the 
 section directly below. Windows users get their own special installation
 procedure, described subsequently.
 
 Unix-like Systems
------------------
+^^^^^^^^^^^^^^^^^
 
 A Makefile has been provided that can be used to compile all of the solvers
 -- DASSL, DASPK3.1, and DASKR -- and the PyDAS wrapper code. To use, invoke the
@@ -66,7 +95,7 @@ the Makefiles (e.g. the Fortran compiler). An example of such a file,
 `make.inc.example`, has been provided.
 
 Windows
--------
+^^^^^^^
 
 The easiest way to compile PyDAS on Windows is using the MinGW compiler in either
 cygwin or git bash.  Simply use the commands::
