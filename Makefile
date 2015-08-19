@@ -38,6 +38,10 @@ else
 	python setup.py daspk install
 endif
 
+test: 
+	cd tests; python dasslTest.py
+	cd tests; python daspkTest.py
+
 DASSL:
 	$(MAKE) -C dassl F77=$(F77)
 

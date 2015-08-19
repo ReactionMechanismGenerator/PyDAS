@@ -5,8 +5,9 @@
 #
 #   PyDAS - A Python wrapper to several differential algebraic system solvers
 #
-#   Copyright (c) 2010-2014 by Joshua W. Allen (joshua.w.allen@gmail.com) 
-#                           extended by Connie W. Gao (connieg@mit.edu)
+#   Copyright (c) 2010-2015 by Joshua W. Allen (joshua.w.allen@gmail.com), 
+#                           Connie W. Gao (connie.w.gao@gmail.com) and the
+#                           Reaction Mechanism Generator Team (rmg_dev@mit.edu)
 #
 #   Permission is hereby granted, free of charge, to any person obtaining a
 #   copy of this software and associated documentation files (the 'Software'),
@@ -82,11 +83,11 @@ if __name__ == '__main__':
 
     # Run the setup command
     setup(name='PyDAS',
-        version='1.0.0',
+        version='1.0.1',
         description='A Python wrapper to several differential algebraic system solvers',
-        author='Joshua W. Allen',
-        author_email='joshua.w.allen@gmail.com',
-        url='http://github.com/jwallen/PyDAS',
+        author='Joshua W. Allen, Connie W. Gao, and the Reaction Mechanism Generator Team',
+        author_email='rmg_dev@mit.edu',
+        url='http://github.com/ReactionMechanismGenerator/PyDAS',
         py_modules= modules,
         packages = ['pydas'],
         package_data = {'pydas': ['*.pxd']},

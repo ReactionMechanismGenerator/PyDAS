@@ -7,7 +7,7 @@
 
 import numpy
 
-from pydas import DASSL
+from pydas.dassl import DASSL
 
 class DiffusionModel(DASSL):
     """

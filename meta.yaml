@@ -1,7 +1,7 @@
 # For conda build
 package:
   name: pydas
-  version: "1.0.0"
+  version: "1.0.1"
 
 source:
   path: .
@@ -34,6 +34,6 @@ test:
     - nosetests -P --all-modules -v -w $SRC_DIR/tests
 
 about:
-  home: http://github.com/GreenGroup/PyDAS
+  home: http://github.com/ReactionMechanismGenerator/PyDAS
   license: MIT
   summary: "A Python wrapper to several differential algebraic system solvers, namely DASSL and DASPK."

@@ -1,6 +1,6 @@
-******************
-PyDAS Users' Guide
-******************
+*******************
+PyDAS Documentation
+*******************
 
 .. toctree::
     :maxdepth: 2
@@ -10,4 +10,4 @@ PyDAS Users' Guide
     installation
     tutorial
     cython
-
+    observer

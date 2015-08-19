@@ -2,6 +2,10 @@
 PyDAS - A Python wrapper to several differential algebraic system solvers
 *************************************************************************
 
+For the full documentation, please view the PDF found in the
+``documentation`` folder. Or download it directly 
+`here <https://github.com/ReactionMechanismGenerator/PyDAS/blob/master/documentation/PyDAS_Documentation.pdf`_.
+
 Introduction
 ============
 
@@ -27,7 +31,9 @@ VODE, the solver used within the ODE solver functionality provided by
 License
 =======
 
-Copyright (c) 2010 by Joshua W. Allen (joshua.w.allen@gmail.com).
+Copyright (c) 2010-2015 by Joshua W. Allen (joshua.w.allen@gmail.com),
+Connie W. Gao (connie.w.gao@gmail.com) and the Reaction Mechanism 
+Generator Team (rmg_dev@mit.edu).
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the 'Software'),
@@ -142,5 +148,5 @@ build and install, assuming you have NumPy, Cython, etc. all set up::
 
 Although at one stage it also required ``LDSHARED='gcc -bundle -undefined dynamic_lookup -arch x86_64'``.
 It seems to keep on changing. If you have difficulty, check the
-`issue tracker <https://github.com/jwallen/PyDAS/issues/>`_, and if you solve
+`issue tracker <https://github.com/ReactionMechanismGenerator/PyDAS/issues/>`_, and if you solve
 your difficulty, please share your successful approach.

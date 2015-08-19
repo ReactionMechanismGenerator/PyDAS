@@ -23,7 +23,7 @@ and k1 = 1.0 and k2 = 0.25.
 import sys
 sys.path.append('.')
 
-from pydas import DASSL
+from pydas.dassl import DASSL
 import numpy
 
 class Model(DASSL):

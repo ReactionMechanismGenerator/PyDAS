@@ -8,7 +8,7 @@
 import numpy
 cimport numpy
 
-from pydas cimport DASSL
+from pydas.dassl cimport DASSL
 
 cdef class DiffusionModel(DASSL):
     """

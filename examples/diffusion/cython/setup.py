@@ -5,7 +5,9 @@
 #
 #   RMG - Reaction Mechanism Generator
 #
-#   Copyright (c) 2010 by Joshua W. Allen (jwallen@mit.edu)
+#   Copyright (c) 2010-2015 by Joshua W. Allen (joshua.w.allen@gmail.com), 
+#                           Connie W. Gao (connie.w.gao@gmail.com) and the
+#                           Reaction Mechanism Generator Team (rmg_dev@mit.edu)
 #
 #   Permission is hereby granted, free of charge, to any person obtaining a
 #   copy of this software and associated documentation files (the 'Software'),

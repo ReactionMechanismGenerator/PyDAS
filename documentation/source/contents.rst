@@ -6,7 +6,6 @@ PyDAS v\ |release| documentation
     :maxdepth: 2
     
     users/index
-    developers/index
 
 * :ref:`genindex`
 * :ref:`modindex`
