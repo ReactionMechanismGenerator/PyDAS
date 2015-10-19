@@ -7,7 +7,7 @@ source:
   path: .
 
 build:
-  number: 2
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }} # number of commits since last git tag (which should be last version bump)
 
 requirements:
   build:
