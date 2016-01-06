@@ -22,16 +22,6 @@ requirements:
     - python 2.7* # for compatibility with RDKit
     - numpy 1.9* # for compatibility with RDKit
 
-test:
-  requires:
-    - nose
-    - matplotlib
-  imports:
-    - pydas
-    - pydas.dassl
-    - pydas.daspk
-  commands:
-    - nosetests -P --all-modules -v -w $SRC_DIR/tests
 
 about:
   home: http://github.com/ReactionMechanismGenerator/PyDAS
