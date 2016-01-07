@@ -30,7 +30,8 @@ test:
     - pydas.dassl
     - pydas.daspk
   commands:
-    - nosetests -P --all-modules -v -w $SRC_DIR/tests
+    - nosetests -P --all-modules -v -w $SRC_DIR/tests [unix]
+    - nosetests -P --all-modules -v -w %SRC_DIR%\tests [win]
 
 about:
   home: http://github.com/ReactionMechanismGenerator/PyDAS

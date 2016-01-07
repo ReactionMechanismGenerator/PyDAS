@@ -5,6 +5,10 @@
 ::gfortran -O3 -c dassl/ddassl.f -o dassl/ddassl.o
 ::gfortran -O3 -c dassl/dlinpk.f -o dassl/dlinpk.o
 ::ar rcs dassl/libddassl.a dassl/daux.o dassl/ddassl.o dassl/dlinpk.o
+::echo "PREFIX"
+cp %PREFIX%\..\..\libs\libpython27.a %PREFIX%\libs
+
+
 cd dassl
 mingw32-make
 cd ..
