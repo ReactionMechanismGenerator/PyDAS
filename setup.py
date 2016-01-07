@@ -60,14 +60,14 @@ if __name__ == '__main__':
             'pydas.dassl', 
             ['pydas/dassl.pyx'], 
             include_dirs=['pydas', numpy.get_include()], 
-            libraries=['gfortran'], 
+            libraries=['gfortran','quadmath'], 
             extra_objects=['dassl/daux.o','dassl/ddassl.o','dassl/dlinpk.o'],
         )
     pydaspk_ext = Extension(
             'pydas.daspk', 
             ['pydas/daspk.pyx'], 
             include_dirs=['pydas', numpy.get_include()], 
-            libraries=['gfortran'], 
+            libraries=['gfortran','quadmath'], 
             extra_objects=['daspk31/solver/adf_dummy.o','daspk31/solver/daux.o','daspk31/solver/ddaspk.o','daspk31/solver/dlinpk.o','daspk31/solver/dsensd.o','daspk31/solver/mpi_dummy.o'],
         )
 
