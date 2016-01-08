@@ -11,6 +11,7 @@ build:
 
 requirements:
   build:
+    - wget
     - gcc # [unix]
     - python 2.7* # for compatibility with RDKit
     - setuptools
@@ -24,14 +25,14 @@ requirements:
 test:
   requires:
     - nose
-    - matplotlib
+#    - matplotlib
   imports:
     - pydas
     - pydas.dassl
     - pydas.daspk
-  commands:
-    - nosetests -P --all-modules -v -w $SRC_DIR/tests [unix]
-    - nosetests -P --all-modules -v -w %SRC_DIR%\tests [win]
+#  commands:
+#    - nosetests -P --all-modules -v -w $SRC_DIR/tests [unix]
+#    - nosetests -P --all-modules -v -w %SRC_DIR%\tests [win]
 
 about:
   home: http://github.com/ReactionMechanismGenerator/PyDAS
