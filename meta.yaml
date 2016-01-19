@@ -16,11 +16,11 @@ requirements:
     - python 2.7* # for compatibility with RDKit
     - setuptools
     - cython ==0.21
-    - numpy 1.9* # for compatibility with RDKit
+    - numpy
   run:
     - libgcc # [unix]
     - python 2.7* # for compatibility with RDKit
-    - numpy 1.9* # for compatibility with RDKit
+    - numpy
 	
 test:
   requires:
