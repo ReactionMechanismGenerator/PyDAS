@@ -11,17 +11,17 @@ build:
 
 requirements:
   build:
+    - wget
     - gcc # [unix]
     - python 2.7* # for compatibility with RDKit
     - setuptools
     - cython ==0.21
-    - numpy 1.9* # for compatibility with RDKit
-    - wget
+    - numpy
   run:
     - libgcc # [unix]
     - python 2.7* # for compatibility with RDKit
-    - numpy 1.9* # for compatibility with RDKit
-
+    - numpy
+	
 test:
   requires:
     - nose
@@ -31,7 +31,8 @@ test:
     - pydas.dassl
     - pydas.daspk
   commands:
-    - nosetests -P --all-modules -v -w $SRC_DIR/tests
+    - nosetests -P --all-modules -v -w $SRC_DIR/tests [unix]
+    - nosetests -P --all-modules -v -w %SRC_DIR%\tests [win]
 
 about:
   home: http://github.com/ReactionMechanismGenerator/PyDAS
