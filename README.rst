@@ -87,6 +87,31 @@ Installation
     Currently only the DASSL and DASPK3.1 solvers have been wrapped. 
     The installation scripts build and install the DASSL wrapper and the
     DASPK wrapper (unless the DASPK3.1 fortran code was not compiled.)
+    
+
+Installing PyDAS binary package via Anaconda (Recommended)
+----------------------------------------------------------
+
+**Now available for Linux, Mac OSX, and Windows Users**
+
+If you wish to use PyDAS out of the box, you can now install it as a binary package using the Anaconda platform.  
+PyDAS can now be installed in binary format using the Anaconda Python Platform.
+This is recommended for a basic user who will not be altering the source code of PyDAS or who is
+less familiar with Unix-based systems.
+
+* Download and install the `Anaconda Python Platform <http://continuum.io/downloads>`_. When prompted to append Anaconda to your PATH, select or type Yes.
+
+* Install PyDAS binary.  Dependencies will be installed automatically.  Type the following into your Terminal to do so ::
+
+    conda install -c rmg -y pydas
+
+* You may now run a PyDAS test job. Save the `Batch Reactor Reaction Series Script <https://github.com/ReactionMechanismGenerator/PyDAS/blob/master/examples/rxnSeries/rxnSeries.py>`_  
+  to a local directory.  Use the Terminal to run the script inside that folder using the following command ::
+
+    python rxnSeries.py
+
+You can now import any functions inside the PyDAS package directly from Python or your own scripts.
+
 
 Windows
 -------
