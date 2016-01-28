@@ -2,10 +2,10 @@
 Installation
 ************
 
-Installing PyDAS binary package via Anaconda
-============================================
+Installing PyDAS binary package via Anaconda (Recommended)
+==========================================================
 
-**Currently only available for Unix-based systems: Linux and MacOSX**
+**Now available for Linux, Mac OSX, and Windows Users**
 
 If you wish to use PyDAS out of the box, you can now install it as a binary package using the Anaconda platform.  
 PyDAS can now be installed in binary format using the Anaconda Python Platform.
