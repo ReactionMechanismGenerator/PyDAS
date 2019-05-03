@@ -1,29 +1,29 @@
 # For conda build
 package:
   name: pydas
-  version: "0" # set by build.sh, which gets it from pydas/__init__.py
+  version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
 
 source:
   path: .
 
 build:
-  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }} # number of commits since last git tag (which should be last version bump)
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
 
 requirements:
   build:
-    - wget # [not linux32]
-    - gcc # [unix]
-    - gcc ==4.8.2 # [linux32]
-    - python 2.7* # for compatibility with RDKit
+    - {{ compiler('c') }} # [unix]
+  host:
+    - python
+    - cython
+    - numpy
     - setuptools
-    - cython ==0.21
-    - numpy
   run:
-    - libgcc # [unix]
-    - python 2.7* # for compatibility with RDKit
-    - numpy
+    - python
+    - {{ pin_compatible('numpy') }}
 	
 test:
+  files:
+    - tests
   requires:
     - nose
     - matplotlib
@@ -32,8 +32,7 @@ test:
     - pydas.dassl
     - pydas.daspk
   commands:
-    - nosetests -P --all-modules -v -w $SRC_DIR/tests [unix]
-    - nosetests -P --all-modules -v -w %SRC_DIR%\tests [win]
+    - nosetests -P --all-modules -v -w tests
 
 about:
   home: http://github.com/ReactionMechanismGenerator/PyDAS
