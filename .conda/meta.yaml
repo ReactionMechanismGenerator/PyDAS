@@ -4,7 +4,7 @@ package:
   version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
 
 source:
-  path: .
+  path: ../
 
 build:
   number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
@@ -23,7 +23,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
 	
 test:
-  files:
+  source_files:
     - tests
   requires:
     - nose
