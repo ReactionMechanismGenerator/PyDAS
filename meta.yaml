@@ -12,6 +12,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }} # [unix]
+    - {{ compiler('fortran') }} # [unix]
   host:
     - python
     - cython
