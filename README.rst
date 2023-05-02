@@ -1,3 +1,22 @@
+.. warning::
+    PyDAS is currently abandonware. The ReactionMechanismGenerator
+    organization no longer has developers capable of maintaining it.
+
+    The usage documentation is still relevant but no new updates will be
+    released and we are unable to fix any bugs.
+
+    We will continue to release conda packages for PyDAS as long as possible.
+    The current version (as of 5/2/2023) was built with libgfortran-ng 12 and
+    Python 3.7 - it is likely in the future that this will no longer work properly
+    and need to be fixed.
+
+    To build PyDAS, clone this repository, install the dependencies (find them
+    with conda search -c rmg PyDAS), upgrade whichever are causing problems,
+    then navigate to the .conda directory and run "conda build ."
+
+    Good Luck,
+    Jackson (@JacksonBurns)
+
 *************************************************************************
 PyDAS - A Python wrapper to several differential algebraic system solvers
 *************************************************************************
