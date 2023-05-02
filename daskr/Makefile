@@ -5,7 +5,7 @@
 ################################################################################
 
 
-CFLAGS=-fPIC -O3
+CFLAGS=-fPIC -fallow-argument-mismatch -O3
 
 DOBJ=solver/daux.o solver/ddaskr.o solver/dlinpk.o preconds/dbanpre.o preconds/dilupre.o preconds/drbdpre.o preconds/drbgpre.o preconds/dsparsk.o
 

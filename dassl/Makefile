@@ -5,7 +5,7 @@
 ################################################################################
 
 
-CFLAGS=-fPIC -O3
+CFLAGS=-fPIC -fallow-argument-mismatch -O3
 
 DOBJ=daux.o ddassl.o dlinpk.o
 
