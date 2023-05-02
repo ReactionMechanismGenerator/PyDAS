@@ -4,7 +4,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo 'Downloading and unpacking DASPK 3.1 fortran source files...'
-    wget http://www.cs.ucsb.edu/~cse/Software/daspk31.tgz
+    wget https://cse.cs.ucsb.edu/sites/cse.cs.ucsb.edu/files/assets/daspk31.tar
     tar zxvf daspk31.tgz -C ../
 fi 
 
