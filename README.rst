@@ -6,7 +6,7 @@
     released and we are unable to fix any bugs.
 
     We will continue to release conda packages for PyDAS as long as possible.
-    The current version (as of 5/2/2023) was built with libgfortran-ng 12 and
+    The current version (as of 5/2/2023) was built with libgfortran-ng 12 (or just libgfortran 5 for Mac) and
     Python 3.7 - it is likely in the future that this will no longer work properly
     and need to be fixed.
 
