@@ -14,12 +14,12 @@ requirements:
     - {{ compiler('c') }} # [unix]
     - {{ compiler('fortran') }} # [unix]
   host:
-    - python
+    - python 3.7
     - cython
     - numpy
     - setuptools
   run:
-    - python
+    - python 3.7
     - {{ pin_compatible('numpy') }}
 	
 test:
