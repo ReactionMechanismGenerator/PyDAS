@@ -329,7 +329,7 @@ cdef class DASPK(Subject):
                            
         
         # Allocate rwork array
-        ny = neq / (npar + 1) # total number of state variables
+        ny = int(neq / (npar + 1)) # total number of state variables
         lrw = 50 + max(self.maxOrder + 4, 7) * neq
 #        if info[11] == 1: # Krylov method, not applicable here
 #            lrw += (MAXL+3+MIN0(1,MAXL-KMP))*NY + (MAXL+3)*MAXL + 1 + LENWP
