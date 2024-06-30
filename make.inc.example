@@ -1,3 +1,0 @@
-F77=gfortran
-
-CYTHON_FLAGS=--inplace
