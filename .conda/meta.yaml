@@ -32,7 +32,7 @@ test:
     - pydas.dassl
     - pydas.daspk
   commands:
-    - python -m unittest -v tests
+    - python -m unittest -v tests/daspkTest.py tests/dasslTest.py
 
 about:
   home: http://github.com/ReactionMechanismGenerator/PyDAS
