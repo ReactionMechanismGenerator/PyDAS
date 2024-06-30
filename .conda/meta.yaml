@@ -1,0 +1,41 @@
+# For conda build
+package:
+  name: pydas
+  version: '1.0.3'
+
+source:
+  path: ../
+
+build:
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
+
+requirements:
+  build:
+    - {{ compiler('c') }} # [unix]
+    - {{ compiler('fortran') }} # [unix]
+  host:
+    - python 3.7
+    - cython
+    - numpy
+    - setuptools
+  run:
+    - python 3.7
+    - {{ pin_compatible('numpy') }}
+	
+test:
+  source_files:
+    - tests
+  requires:
+    - nose
+    - matplotlib
+  imports:
+    - pydas
+    - pydas.dassl
+    - pydas.daspk
+  commands:
+    - nosetests -P --all-modules -v -w tests
+
+about:
+  home: http://github.com/ReactionMechanismGenerator/PyDAS
+  license: MIT
+  summary: "A Python wrapper to several differential algebraic system solvers, namely DASSL and DASPK."

@@ -266,13 +266,13 @@ class DASPKCheck(unittest.TestCase):
             if Ctrue > 1e-8:
                 self.assertAlmostEqual(C / Ctrue, 1.0, 6, 'At t = %g: C = %g, but Ctrue = %g' % (t, C, Ctrue))
                 
-        print "At 16 seconds after simulation..."
-        print "dA/dk1 = %f" % dAdk1vec[-1]        
-        print "dB/dk1 = %f" % dBdk1vec[-1]        
-        print "dC/dk1 = %f" % dCdk1vec[-1]            
-        print "dA/dk2 = %f" % dAdk2vec[-1]
-        print "dB/dk2 = %f" % dBdk2vec[-1]
-        print "dC/dk2 = %f" % dCdk2vec[-1]
+        print("At 16 seconds after simulation...")
+        print("dA/dk1 = %f" % dAdk1vec[-1])
+        print("dB/dk1 = %f" % dBdk1vec[-1])
+        print("dC/dk1 = %f" % dCdk1vec[-1])
+        print("dA/dk2 = %f" % dAdk2vec[-1])
+        print("dB/dk2 = %f" % dBdk2vec[-1])
+        print("dC/dk2 = %f" % dCdk2vec[-1])
         plt.figure(1)
         plt.plot(tvec, Avec, label='A')
         plt.plot(tvec, Bvec, label='B')
