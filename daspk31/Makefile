@@ -23,10 +23,10 @@ $(DLIB): $(DOBJ)
 %.o: %.f
 	$(F77) $(CFLAGS) $(FFLAGS) -c $< -o $@
 
-solver/%.f: | daspk31.tgz
-	tar zxvf daspk31.tgz -C ../
+solver/%.f: | daspk31.tar
+	tar zxvf daspk31.tar -C ../
 
-daspk31.tgz:
+daspk31.tar:
 	./download_daspk31.sh
 
 clean:
