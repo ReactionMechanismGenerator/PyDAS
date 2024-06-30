@@ -11,7 +11,7 @@
     and need to be fixed.
 
     To build PyDAS, clone this repository, install the dependencies (find them
-    with conda search -c rmg PyDAS), upgrade whichever are causing problems,
+    with conda search -c rmg pydas), upgrade whichever are causing problems,
     then navigate to the .conda directory and run "conda build ."
 
     Good Luck,

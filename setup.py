@@ -84,7 +84,7 @@ if __name__ == '__main__':
     # Read the version number
     exec(open('pydas/version.py').read())
     # Run the setup command
-    setup(name='PyDAS',
+    setup(name='pydas',
         version=__version__,
         description='A Python wrapper to several differential algebraic system solvers',
         author='Joshua W. Allen, Connie W. Gao, and the Reaction Mechanism Generator Team',
