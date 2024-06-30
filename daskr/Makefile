@@ -5,7 +5,9 @@
 ################################################################################
 
 
-CFLAGS=-fPIC -fallow-argument-mismatch -O3
+CFLAGS=-fPIC -O3
+
+FFLAGS=-fallow-argument-mismatch
 
 DOBJ=solver/daux.o solver/ddaskr.o solver/dlinpk.o preconds/dbanpre.o preconds/dilupre.o preconds/drbdpre.o preconds/drbgpre.o preconds/dsparsk.o
 
@@ -24,7 +26,7 @@ $(SLIB): $(SOBJ)
 	ar rcs $(SLIB) $(SOBJ)
 
 %.o: %.f
-	$(F77) $(CFLAGS) -c $< -o $@
+	$(F77) $(CFLAGS) $(FFLAGS) -c $< -o $@
 	
 clean:
 	rm -f $(DLIB) $(DOBJ) $(SLIB) $(SOBJ)

@@ -5,7 +5,9 @@
 ################################################################################
 
 
-CFLAGS=-fPIC -fallow-argument-mismatch -O3
+CFLAGS=-fPIC -O3
+
+FFLAGS=-fallow-argument-mismatch
 
 DOBJ=solver/adf_dummy.o solver/daux.o solver/ddaskr.o solver/ddaspk.o solver/dlinpk.o solver/dsensd.o solver/mpi_dummy.o
 
@@ -19,7 +21,7 @@ $(DLIB): $(DOBJ)
 	ar rcs $(DLIB) $(DOBJ)
 
 %.o: %.f
-	$(F77) $(CFLAGS) -c $< -o $@
+	$(F77) $(CFLAGS) $(FFLAGS) -c $< -o $@
 
 solver/%.f: | daspk31.tgz
 	tar zxvf daspk31.tgz -C ../
