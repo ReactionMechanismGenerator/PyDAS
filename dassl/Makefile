@@ -5,7 +5,9 @@
 ################################################################################
 
 
-CFLAGS=-fPIC -fallow-argument-mismatch -O3
+CFLAGS=-fPIC -O3
+
+FFLAGS=-fallow-argument-mismatch
 
 DOBJ=daux.o ddassl.o dlinpk.o
 
@@ -17,7 +19,7 @@ $(DLIB): $(DOBJ)
 	ar rcs $(DLIB) $(DOBJ)
 
 %.o: %.f
-	$(F77) $(CFLAGS) -c $< -o $@
+	$(F77) $(CFLAGS) $(FFLAGS) -c $< -o $@
 	
 clean:
 	rm -f $(DLIB) $(DOBJ)

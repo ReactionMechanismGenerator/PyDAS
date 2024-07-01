@@ -72,19 +72,13 @@ if __name__ == '__main__':
         )
 
 
-    modules = ['pydas.dassl', 'pydas.observer']
-    extensions = [pydas_ext, observer_ext]
-
-    if 'daspk' in sys.argv:
-        # Optionally compile and make pydaspk if the user requests it
-        sys.argv.remove('daspk')
-        modules.append('pydas.daspk')
-        extensions.append(pydaspk_ext)
+    modules = ['pydas.dassl', 'pydas.observer', 'pydas.daspk']
+    extensions = [pydas_ext, observer_ext, pydaspk_ext]
 
     # Read the version number
     exec(open('pydas/version.py').read())
     # Run the setup command
-    setup(name='PyDAS',
+    setup(name='pydas',
         version=__version__,
         description='A Python wrapper to several differential algebraic system solvers',
         author='Joshua W. Allen, Connie W. Gao, and the Reaction Mechanism Generator Team',
