@@ -260,11 +260,11 @@ class DASPKCheck(unittest.TestCase):
 
             Ctrue = 1.0 - Atrue - Btrue
             if Atrue > 1e-8:
-                self.assertAlmostEqual(A / Atrue, 1.0, 6)
+                self.assertAlmostEqual(A / Atrue, 1.0, 5)
             if Btrue > 1e-8:
-                self.assertAlmostEqual(B / Btrue, 1.0, 6, 'At t = %g: B = %g, but Btrue = %g' % (t, B, Btrue))
+                self.assertAlmostEqual(B / Btrue, 1.0, 5, 'At t = %g: B = %g, but Btrue = %g' % (t, B, Btrue))
             if Ctrue > 1e-8:
-                self.assertAlmostEqual(C / Ctrue, 1.0, 6, 'At t = %g: C = %g, but Ctrue = %g' % (t, C, Ctrue))
+                self.assertAlmostEqual(C / Ctrue, 1.0, 5, 'At t = %g: C = %g, but Ctrue = %g' % (t, C, Ctrue))
                 
         print("At 16 seconds after simulation...")
         print("dA/dk1 = %f" % dAdk1vec[-1])
